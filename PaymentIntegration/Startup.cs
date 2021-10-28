@@ -24,7 +24,10 @@ namespace PaymentIntegration
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddRazorPages(options =>
+            {
+                // options.Conventions.AddPageRoute("/NewPayment", "");
+            });
 
             services
                 .AddRefitClient<IDumDumPayApi>()
@@ -52,7 +55,6 @@ namespace PaymentIntegration
             }
             else
             {
-                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 
