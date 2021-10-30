@@ -24,13 +24,9 @@ namespace PaymentIntegration
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages(options =>
-            {
-                // options.Conventions.AddPageRoute("/NewPayment", "");
-            });
+            services.AddRazorPages();
 
-            services
-                .AddRefitClient<IDumDumPayApi>()
+            services.AddRefitClient<IDumDumPayApi>()
                 .ConfigureHttpClient(c =>
                 {
                     c.BaseAddress = new Uri("https://dumdumpay.site/api");
@@ -44,6 +40,7 @@ namespace PaymentIntegration
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(2);
             });
+            
             services.AddDistributedMemoryCache();
         }
 
@@ -62,8 +59,6 @@ namespace PaymentIntegration
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseSession();
             

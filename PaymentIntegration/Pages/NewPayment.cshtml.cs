@@ -29,12 +29,7 @@ namespace PaymentIntegration.Pages
         [BindProperty] 
         public NewPaymentContext PaymentContext { get; set; }
 
-        public List<string> Errors { get; set; }
-
-        public void OnGet()
-        {
-            
-        }
+        public List<string> Errors { get; private set; }
 
         public async Task<ActionResult> OnPostAsync()
         {
@@ -58,6 +53,7 @@ namespace PaymentIntegration.Pages
             {
                 Errors = response.Content?.Errors.Select(e => $"{e.Type}: {e.Message}").ToList();
             }
+            
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 Errors = new List<string> {"Unauthorized"};
